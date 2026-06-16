@@ -1,0 +1,297 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://knowledge-os.local/schemas/extraction/v1/extraction-quality-report.schema.json",
+  "title": "ExtractionQualityReport",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "reportId",
+    "extractionVersion",
+    "domainPackId",
+    "runIds",
+    "status",
+    "corpus",
+    "precision",
+    "evidenceCoverage",
+    "failures",
+    "thresholds",
+    "warnings",
+    "createdAt"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "extraction-quality-report.v1"
+    },
+    "reportId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "extractionVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "domainPackId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "runIds": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": ["passed", "failed"]
+    },
+    "corpus": {
+      "$ref": "#/$defs/CorpusMetrics"
+    },
+    "precision": {
+      "$ref": "#/$defs/PrecisionMetrics"
+    },
+    "evidenceCoverage": {
+      "$ref": "#/$defs/EvidenceCoverage"
+    },
+    "failures": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/FailureRecord"
+      }
+    },
+    "thresholds": {
+      "$ref": "#/$defs/Thresholds"
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "$defs": {
+    "CorpusMetrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "documentCount",
+        "completedDocumentCount",
+        "failedDocumentCount",
+        "completionRate"
+      ],
+      "properties": {
+        "documentCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "completedDocumentCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "failedDocumentCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "completionRate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "PrecisionMetrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "nodes",
+        "edges",
+        "overallPrecisionRate",
+        "overallExpectedCoverageRate"
+      ],
+      "properties": {
+        "nodes": {
+          "$ref": "#/$defs/CandidateComparison"
+        },
+        "edges": {
+          "$ref": "#/$defs/CandidateComparison"
+        },
+        "overallPrecisionRate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "overallExpectedCoverageRate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "CandidateComparison": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "expectedCount",
+        "actualCount",
+        "matchedCount",
+        "unexpectedCount",
+        "missingExpectedCount",
+        "precisionRate",
+        "expectedCoverageRate",
+        "unexpected",
+        "missingExpected"
+      ],
+      "properties": {
+        "expectedCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "actualCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "matchedCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unexpectedCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "missingExpectedCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "precisionRate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "expectedCoverageRate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "unexpected": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "missingExpected": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "EvidenceCoverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidateCount",
+        "candidatesWithEvidenceCount",
+        "candidatesMissingEvidenceCount",
+        "evidenceCoverageRate"
+      ],
+      "properties": {
+        "candidateCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "candidatesWithEvidenceCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "candidatesMissingEvidenceCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "evidenceCoverageRate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "FailureRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "runId",
+        "documentId",
+        "status",
+        "failedDocumentCount",
+        "message"
+      ],
+      "properties": {
+        "runId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "documentId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "type": "string"
+        },
+        "failedDocumentCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "Thresholds": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "minCompletionRate",
+        "minNodePrecisionRate",
+        "minEdgePrecisionRate",
+        "minOverallExpectedCoverageRate",
+        "minEvidenceCoverageRate"
+      ],
+      "properties": {
+        "minCompletionRate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "minNodePrecisionRate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "minEdgePrecisionRate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "minOverallExpectedCoverageRate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "minEvidenceCoverageRate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    }
+  }
+}

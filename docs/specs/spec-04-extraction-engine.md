@@ -44,11 +44,14 @@ Output:
 - `NodeCandidate`
 - `EdgeCandidate`
 - `ExtractionRun`
+- `ExtractionQualityReport`
 
 Contract location:
 
 - `schemas/extraction/v1/extraction-run.schema.json`
+- `schemas/extraction/v1/extraction-quality-report.schema.json`
 - `packages/extraction/src/deterministic-foundry-extractor.mjs`
+- `packages/extraction/src/extraction-quality-report.mjs`
 - `evals/extraction/foundry-overview.expected.json`
 
 ## Security and Privacy

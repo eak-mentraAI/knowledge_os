@@ -19,22 +19,7 @@ const run = extractFoundryCandidates({
   now: "2026-06-16T23:00:00Z"
 });
 
-test("Foundry overview eval extracts expected evidence-linked nodes", () => {
-  assert.deepEqual(run.nodeCandidates.map((candidate) => candidate.name).sort(), expected.expectedNodes.sort());
-  for (const candidate of run.nodeCandidates) {
-    assert.ok(candidate.evidenceSpans.length > 0);
-  }
-});
-
-test("Foundry overview eval extracts expected evidence-linked edges", () => {
-  const actualEdges = run.edgeCandidates.map(({ edgeType, sourceName, targetName }) => ({ edgeType, sourceName, targetName }));
-  assert.deepEqual(actualEdges, expected.expectedEdges);
-  for (const candidate of run.edgeCandidates) {
-    assert.ok(candidate.evidenceSpans.length > 0);
-  }
-});
-
-test("Foundry overview eval quality report passes thresholds", () => {
+test("extraction quality report summarizes completion, precision, and evidence coverage", () => {
   const report = createExtractionQualityReport({
     runs: [run],
     expectedNodes: expected.expectedNodes,
@@ -44,6 +29,31 @@ test("Foundry overview eval quality report passes thresholds", () => {
 
   assert.equal(report.status, "passed");
   assert.equal(report.corpus.completionRate, 1);
+  assert.equal(report.precision.nodes.precisionRate, 1);
+  assert.equal(report.precision.edges.precisionRate, 1);
   assert.equal(report.precision.overallExpectedCoverageRate, 1);
   assert.equal(report.evidenceCoverage.evidenceCoverageRate, 1);
+  assert.deepEqual(report.failures, []);
+  assert.deepEqual(report.warnings, []);
+});
+
+test("extraction quality report exposes failures, missing expectations, and missing evidence", () => {
+  const degraded = structuredClone(run);
+  degraded.status = "completed_with_errors";
+  degraded.metrics.failedDocumentCount = 1;
+  degraded.nodeCandidates[0].evidenceSpans = [];
+
+  const report = createExtractionQualityReport({
+    runs: [degraded],
+    expectedNodes: [...expected.expectedNodes, "Missing Product"],
+    expectedEdges: expected.expectedEdges,
+    now: "2026-06-16T23:10:00Z"
+  });
+
+  assert.equal(report.status, "failed");
+  assert.equal(report.corpus.failedDocumentCount, 1);
+  assert.equal(report.evidenceCoverage.candidatesMissingEvidenceCount, 1);
+  assert.equal(report.failures.length, 1);
+  assert.ok(report.precision.nodes.missingExpected.includes("Missing Product"));
+  assert.ok(report.warnings.some((warning) => warning.includes("Missing expected node candidates")));
 });

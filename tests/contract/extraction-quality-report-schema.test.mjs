@@ -7,8 +7,10 @@ import { extractFoundryCandidates } from "../../packages/extraction/src/determin
 import { createExtractionQualityReport } from "../../packages/extraction/src/extraction-quality-report.mjs";
 import { loadDomainPack } from "../../packages/ontology/src/domain-pack.mjs";
 import { loadJson } from "../../packages/source-acquisition-contracts/src/registry.mjs";
+import { validate } from "../helpers/simple-schema-validator.mjs";
 
 const repoRoot = resolve(import.meta.dirname, "..", "..");
+const schema = loadJson(resolve(repoRoot, "schemas/extraction/v1/extraction-quality-report.schema.json"));
 const expected = loadJson(resolve(repoRoot, "evals/extraction/foundry-overview.expected.json"));
 const html = readFileSync(resolve(repoRoot, expected.fixture), "utf8");
 const sourceRecord = loadJson(resolve(repoRoot, "schemas/source-acquisition/v1/examples/source-record.fetched.json"));
@@ -19,22 +21,7 @@ const run = extractFoundryCandidates({
   now: "2026-06-16T23:00:00Z"
 });
 
-test("Foundry overview eval extracts expected evidence-linked nodes", () => {
-  assert.deepEqual(run.nodeCandidates.map((candidate) => candidate.name).sort(), expected.expectedNodes.sort());
-  for (const candidate of run.nodeCandidates) {
-    assert.ok(candidate.evidenceSpans.length > 0);
-  }
-});
-
-test("Foundry overview eval extracts expected evidence-linked edges", () => {
-  const actualEdges = run.edgeCandidates.map(({ edgeType, sourceName, targetName }) => ({ edgeType, sourceName, targetName }));
-  assert.deepEqual(actualEdges, expected.expectedEdges);
-  for (const candidate of run.edgeCandidates) {
-    assert.ok(candidate.evidenceSpans.length > 0);
-  }
-});
-
-test("Foundry overview eval quality report passes thresholds", () => {
+test("extraction quality report satisfies the v1 schema", () => {
   const report = createExtractionQualityReport({
     runs: [run],
     expectedNodes: expected.expectedNodes,
@@ -42,8 +29,12 @@ test("Foundry overview eval quality report passes thresholds", () => {
     now: "2026-06-16T23:10:00Z"
   });
 
-  assert.equal(report.status, "passed");
-  assert.equal(report.corpus.completionRate, 1);
-  assert.equal(report.precision.overallExpectedCoverageRate, 1);
-  assert.equal(report.evidenceCoverage.evidenceCoverageRate, 1);
+  assert.deepEqual(validate(schema, report), []);
+});
+
+test("extraction quality report requires completion, precision, failure, and evidence coverage sections", () => {
+  assert.ok(schema.required.includes("corpus"));
+  assert.ok(schema.required.includes("precision"));
+  assert.ok(schema.required.includes("failures"));
+  assert.ok(schema.required.includes("evidenceCoverage"));
 });
