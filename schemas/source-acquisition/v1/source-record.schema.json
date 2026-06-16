@@ -36,11 +36,11 @@
     },
     "url": {
       "type": "string",
-      "format": "uri"
+      "minLength": 1
     },
     "normalizedUrl": {
       "type": "string",
-      "format": "uri"
+      "minLength": 1
     },
     "status": {
       "type": "string",
@@ -157,4 +157,3 @@
     }
   }
 }
-

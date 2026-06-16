@@ -1,10 +1,15 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import test from "node:test";
+import { ingestUrlList } from "../../packages/source-acquisition/src/url-list-ingestion.mjs";
 import {
+  loadJson,
   loadExamples,
   loadSchemas
 } from "../../packages/source-acquisition-contracts/src/registry.mjs";
 
+const repoRoot = resolve(import.meta.dirname, "..", "..");
 const schemasByTitle = new Map(loadSchemas().map((schema) => [schema.title, schema]));
 const examplesByKind = new Map(loadExamples().map((example) => {
   if ("sourceType" in example && "location" in example) return ["SourceDefinition", example];
@@ -118,3 +123,18 @@ test("source records require provenance and content hash fields", () => {
   ]);
 });
 
+test("URL list ingestion output satisfies inventory and source record contracts", () => {
+  const csvText = readFileSync(resolve(repoRoot, "tests/fixtures/source-acquisition/urls.csv"), "utf8");
+  const sourceDefinition = loadJson(resolve(repoRoot, "schemas/source-acquisition/v1/examples/source-definition.foundry-docs.json"));
+  const inventory = ingestUrlList({
+    csvText,
+    sourceDefinition,
+    crawlJobId: "crawl-foundry-docs-fixture",
+    now: "2026-06-16T20:00:00Z"
+  });
+
+  assert.deepEqual(validate(schemasByTitle.get("CrawlInventory"), inventory), []);
+  for (const record of inventory.records) {
+    assert.deepEqual(validate(schemasByTitle.get("SourceRecord"), record), []);
+  }
+});

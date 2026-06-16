@@ -16,7 +16,7 @@ This backlog is the source of truth for the completion loop. Agents should work 
 | W0-S1 | 0 | Standards, repo shape, and agent workflow | complete | Docs scaffold, anti-slop standards, audit pack, completion loop |
 | W0-S2 | 0 | Quality command contract and test skeleton | complete | Root quality commands documented and wired to placeholder-safe checks |
 | W1-S1 | 1 | Source definition and crawl inventory contracts | complete | Unit and contract tests for source/crawl schemas |
-| W1-S2 | 1 | URL list ingestion | not_started | Unit tests plus local ingestion fixture |
+| W1-S2 | 1 | URL list ingestion | complete | Unit tests plus local ingestion fixture |
 | W1-S3 | 1 | Documentation portal discovery | not_started | Discovery integration test with controlled fixture site |
 | W1-S4 | 1 | Canonical document generation | not_started | Canonical document contract tests and evidence anchors |
 | W2-S1 | 2 | Base ontology package | not_started | Ontology schema unit tests and examples |
@@ -119,3 +119,18 @@ E2e tests: `node tools/quality/run-gate.mjs e2e` passed as not applicable becaus
 Security/performance checks: Full `node tools/quality/run-gate.mjs quality` passed. Schemas require allowlists, crawl limits, provenance, content hash fields, failure totals, and checkpoint state.
 Open debt: JSON Schema validation is currently enforced by dependency-free contract tests; if a future sprint adds a full JSON Schema validator, update the quality contract and tests together.
 Next sprint: W1-S2.
+
+### W1-S2 Completion Note
+
+Date: 2026-06-16
+Agent: Codex
+Commit: W1-S2 completion commit
+Scope: Added URL list CSV ingestion package with parsing, normalization, credential/fragment removal, deduplication, domain allowlist enforcement, transparent skipped/blocked records, and crawl inventory output.
+Local deployment: Not applicable. This sprint is a package-level ingestion unit with no app or service runtime.
+Unit tests: `node tools/quality/run-gate.mjs unit` passed with 9 tests.
+Contract tests: `node tools/quality/run-gate.mjs contract` passed with 6 tests, including validation that ingestion output satisfies `CrawlInventory` and `SourceRecord` contracts.
+Integration tests: `node tools/quality/run-gate.mjs integration` passed as not applicable because no deployable app/service implementation exists yet.
+E2e tests: `node tools/quality/run-gate.mjs e2e` passed as not applicable because no app/workflow implementation exists yet.
+Security/performance checks: Full `node tools/quality/run-gate.mjs quality` passed. URL normalization strips credentials and fragments; allowlist enforcement blocks out-of-domain URLs.
+Open debt: CSV parser is intentionally scoped to URL-list ingestion and should not be generalized until another source type needs it.
+Next sprint: W1-S3.
