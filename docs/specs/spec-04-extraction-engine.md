@@ -45,6 +45,12 @@ Output:
 - `EdgeCandidate`
 - `ExtractionRun`
 
+Contract location:
+
+- `schemas/extraction/v1/extraction-run.schema.json`
+- `packages/extraction/src/deterministic-foundry-extractor.mjs`
+- `evals/extraction/foundry-overview.expected.json`
+
 ## Security and Privacy
 
 - Prompt inputs must be bounded and evidence-based.
@@ -62,4 +68,3 @@ Output:
 - Entity and edge precision measured against curated eval set.
 - Every candidate has source evidence.
 - Failed extractions are resumable and visible.
-

@@ -1,0 +1,16 @@
+{
+  "fixture": "tests/fixtures/document-processing/foundry-overview.html",
+  "expectedNodes": [
+    "Foundry",
+    "Ontology",
+    "AIP"
+  ],
+  "expectedEdges": [
+    {
+      "edgeType": "PROVIDES_CONTEXT_TO",
+      "sourceName": "Ontology",
+      "targetName": "AIP"
+    }
+  ]
+}
+

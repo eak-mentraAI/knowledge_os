@@ -21,7 +21,7 @@ This backlog is the source of truth for the completion loop. Agents should work 
 | W1-S4 | 1 | Canonical document generation | complete | Canonical document contract tests and evidence anchors |
 | W2-S1 | 2 | Base ontology package | complete | Ontology schema unit tests and examples |
 | W2-S2 | 2 | Foundry domain pack | complete | Domain pack validation tests and fixture coverage |
-| W2-S3 | 2 | Extraction candidate pipeline | not_started | Extraction eval fixture with evidence-linked nodes and edges |
+| W2-S3 | 2 | Extraction candidate pipeline | complete | Extraction eval fixture with evidence-linked nodes and edges |
 | W2-S4 | 2 | Extraction quality reporting | not_started | Completion, precision, failure, and evidence coverage reports |
 | W3-S1 | 3 | Entity resolution contracts | not_started | Alias and canonical ID unit tests |
 | W3-S2 | 3 | Merge decision audit trail | not_started | Resolution decision tests and undo/supersede fixtures |
@@ -194,3 +194,19 @@ E2e tests: `node tools/quality/run-gate.mjs e2e` passed as not applicable becaus
 Security/performance checks: Full `node tools/quality/run-gate.mjs quality` passed. Foundry pack includes security and governance seed entities and extraction focus.
 Open debt: Extraction candidate pipeline begins in W2-S3; this sprint does not extract nodes or edges from canonical documents yet.
 Next sprint: W2-S3.
+
+### W2-S3 Completion Note
+
+Date: 2026-06-16
+Agent: Codex
+Commit: W2-S3 completion commit
+Scope: Added extraction run schema, deterministic Foundry extractor, evidence-linked node and edge candidates, extraction unit/contract tests, and Foundry overview eval fixture.
+Local deployment: Not applicable. This sprint is extraction package/eval work and does not add app or service runtime behavior.
+Unit tests: `node tools/quality/run-gate.mjs unit` passed with 23 tests.
+Contract tests: `node tools/quality/run-gate.mjs contract` passed with 16 tests.
+Integration tests: `node tools/quality/run-gate.mjs integration` passed with 1 existing controlled fixture portal test.
+E2e tests: `node tools/quality/run-gate.mjs e2e` passed as not applicable because no app/workflow implementation exists yet.
+Evaluation tests: `node tools/quality/run-gate.mjs eval` passed with 2 Foundry overview extraction eval tests.
+Security/performance checks: Full `node tools/quality/run-gate.mjs quality` passed. Candidates include evidence spans, confidence, extraction version, document ID, and source record ID.
+Open debt: Deterministic extractor is a bootstrap evaluator; LLM extraction, prompt versioning, and broader relationship coverage remain future work.
+Next sprint: W2-S4.
