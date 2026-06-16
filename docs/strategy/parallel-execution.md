@@ -9,9 +9,10 @@ The project should maximize wall-clock speed only after quality constraints are 
 3. Secure interfaces and fixtures.
 4. Assign focused agents.
 5. Run responsible work in parallel.
-6. Reconcile contracts.
-7. Run independent audits.
-8. Merge only after gates pass.
+6. Run unit, contract, integration, and e2e gates for affected work.
+7. Reconcile contracts.
+8. Run independent audits.
+9. Merge only after gates pass.
 
 ## Good Parallel Work
 

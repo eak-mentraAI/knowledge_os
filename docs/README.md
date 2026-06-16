@@ -27,13 +27,20 @@ The original Word documents are stored in `docs/source/` in the project folder:
 ## Planning
 
 - [Roadmap](roadmap/roadmap.md)
+- [Sprint Backlog and Completion Ledger](roadmap/sprint-backlog.md)
 - [Specs Index](specs/README.md)
 
 ## Strategy
 
+- [Implementation Completion Loop](strategy/implementation-completion-loop.md)
 - [Documentation Sharding Strategy](strategy/documentation-sharding.md)
 - [Agent Orchestration Strategy](strategy/agent-orchestration.md)
 - [Parallel Execution Strategy](strategy/parallel-execution.md)
+
+## Testing
+
+- [Test Strategy](testing/test-strategy.md)
+- [E2e Acceptance Matrix](testing/e2e-acceptance-matrix.md)
 
 ## Audit
 

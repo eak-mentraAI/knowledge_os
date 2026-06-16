@@ -2,6 +2,8 @@
 
 The project should use dedicated agents to create focus and reduce context overload. Agents are not interchangeable generalists; each one receives a narrow seed pack and produces bounded deliverables.
 
+Implementation work follows the sprint loop in `docs/strategy/implementation-completion-loop.md` and the ledger in `docs/roadmap/sprint-backlog.md`.
+
 ## Agent Classes
 
 Implementation agents:
@@ -29,6 +31,7 @@ Independent business audit agents:
 ## Orchestration Rules
 
 - Start every wave with a single owner agent for interfaces and fixtures.
+- Work the first incomplete sprint in the sprint backlog unless the user changes priority.
 - Do not parallelize implementation until shared contracts are approved.
 - Parallelize adapters, UI surfaces, eval fixtures, and docs only when their interfaces are stable.
 - Keep audit independent: audit agents should receive outputs, not live drafts or author rationale.
@@ -48,6 +51,7 @@ Each agent returns:
 - Security and performance considerations.
 - Known risks or debt.
 - Suggested next shard.
+- Sprint ledger update.
 
 ## Responsible Parallelization
 

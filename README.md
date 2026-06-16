@@ -14,7 +14,10 @@ Primary entry points:
 - [Anti-Slop Engineering Standards](docs/standards/anti-slop.md)
 - [Brand and Design System Standards](docs/standards/brand-design-system.md)
 - [Roadmap](docs/roadmap/roadmap.md)
+- [Sprint Backlog and Completion Ledger](docs/roadmap/sprint-backlog.md)
 - [Engineering Specs](docs/specs/README.md)
+- [Implementation Completion Loop](docs/strategy/implementation-completion-loop.md)
+- [Test Strategy](docs/testing/test-strategy.md)
 - [Documentation Sharding Strategy](docs/strategy/documentation-sharding.md)
 - [Agent Orchestration Strategy](docs/strategy/agent-orchestration.md)
 - [Independent Business Audit Pack](docs/audits/independent-audit-agent-pack.md)
@@ -39,6 +42,7 @@ Knowledge OS produces four primary output families:
 - Security, privacy, governance, and performance are first-class acceptance criteria.
 - Forks require explicit approval, an owner, an exit plan, and documented upstream divergence.
 - Parallel work is encouraged only after interfaces, fixtures, contracts, and audit gates are secured.
+- Roadmap work proceeds through the sprint completion loop: test, implement, locally deploy where applicable, run e2e, fix, record proof, commit, and continue.
 
 ## Tooling Baseline
 
