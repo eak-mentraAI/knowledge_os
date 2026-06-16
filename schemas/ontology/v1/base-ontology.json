@@ -1,0 +1,220 @@
+{
+  "schemaVersion": "ontology.v1",
+  "ontologyId": "base",
+  "version": "v1",
+  "description": "Domain-agnostic Knowledge OS base ontology for enterprise reasoning.",
+  "nodeTypes": [
+    {
+      "name": "Domain",
+      "category": "business",
+      "description": "A bounded area of enterprise knowledge.",
+      "requiredProperties": ["name", "summary", "sourceEvidence"]
+    },
+    {
+      "name": "Capability",
+      "category": "business",
+      "description": "A business or technical ability the organization possesses.",
+      "requiredProperties": ["name", "summary", "sourceEvidence"]
+    },
+    {
+      "name": "Component",
+      "category": "business",
+      "description": "A platform, service, application, or technical system.",
+      "requiredProperties": ["name", "summary", "sourceEvidence"]
+    },
+    {
+      "name": "Workflow",
+      "category": "business",
+      "description": "A repeatable process or sequence of actions.",
+      "requiredProperties": ["name", "summary", "sourceEvidence"]
+    },
+    {
+      "name": "Decision",
+      "category": "business",
+      "description": "A business or technical choice that affects outcomes.",
+      "requiredProperties": ["name", "summary", "sourceEvidence"]
+    },
+    {
+      "name": "Constraint",
+      "category": "business",
+      "description": "A limitation that affects implementation.",
+      "requiredProperties": ["name", "summary", "sourceEvidence"]
+    },
+    {
+      "name": "Policy",
+      "category": "governance",
+      "description": "A rule governing system or organizational behavior.",
+      "requiredProperties": ["name", "summary", "sourceEvidence"]
+    },
+    {
+      "name": "Persona",
+      "category": "business",
+      "description": "An actor or role within the system.",
+      "requiredProperties": ["name", "summary", "sourceEvidence"]
+    },
+    {
+      "name": "Project",
+      "category": "execution",
+      "description": "A bounded initiative with defined goals.",
+      "requiredProperties": ["name", "goal", "sourceEvidence"]
+    },
+    {
+      "name": "Dependency",
+      "category": "business",
+      "description": "A relationship where one capability, workflow, or component relies on another.",
+      "requiredProperties": ["name", "summary", "sourceEvidence"]
+    },
+    {
+      "name": "Risk",
+      "category": "business",
+      "description": "A potential issue affecting delivery, governance, compliance, security, or operations.",
+      "requiredProperties": ["name", "summary", "sourceEvidence"]
+    },
+    {
+      "name": "Outcome",
+      "category": "business",
+      "description": "A measurable business result.",
+      "requiredProperties": ["name", "metric", "sourceEvidence"]
+    },
+    {
+      "name": "Document",
+      "category": "source",
+      "description": "A canonical source document.",
+      "requiredProperties": ["documentId", "url", "sourceEvidence"]
+    },
+    {
+      "name": "Section",
+      "category": "source",
+      "description": "A section within a canonical source document.",
+      "requiredProperties": ["sectionId", "title", "sourceEvidence"]
+    },
+    {
+      "name": "Concept",
+      "category": "knowledge",
+      "description": "A named idea, term, or knowledge object.",
+      "requiredProperties": ["name", "definition", "sourceEvidence"]
+    },
+    {
+      "name": "UseCase",
+      "category": "business",
+      "description": "A user or business scenario supported by knowledge assets.",
+      "requiredProperties": ["name", "summary", "sourceEvidence"]
+    },
+    {
+      "name": "SecurityBoundary",
+      "category": "security",
+      "description": "A boundary that protects, segments, authenticates, or authorizes access.",
+      "requiredProperties": ["name", "summary", "sourceEvidence"]
+    },
+    {
+      "name": "GovernanceControl",
+      "category": "governance",
+      "description": "A control that enforces governance, compliance, or operational policy.",
+      "requiredProperties": ["name", "summary", "sourceEvidence"]
+    }
+  ],
+  "edgeTypes": [
+    {
+      "name": "CONTAINS",
+      "description": "Parent contains child.",
+      "sourceTypes": ["Domain", "Document", "Project"],
+      "targetTypes": ["Section", "Concept", "Capability", "Component", "Workflow"]
+    },
+    {
+      "name": "PART_OF",
+      "description": "Source is part of target.",
+      "sourceTypes": ["Section", "Concept", "Component", "Workflow"],
+      "targetTypes": ["Domain", "Document", "Project"]
+    },
+    {
+      "name": "DESCRIBES",
+      "description": "Source describes target.",
+      "sourceTypes": ["Document", "Section"],
+      "targetTypes": ["Domain", "Concept", "Capability", "Component", "Workflow", "Policy"]
+    },
+    {
+      "name": "DEFINES",
+      "description": "Source defines target.",
+      "sourceTypes": ["Document", "Section", "Concept"],
+      "targetTypes": ["Concept", "Policy", "Constraint"]
+    },
+    {
+      "name": "USES",
+      "description": "Source uses target.",
+      "sourceTypes": ["Persona", "Workflow", "Project", "Component"],
+      "targetTypes": ["Capability", "Component", "Concept"]
+    },
+    {
+      "name": "ENABLES",
+      "description": "Source enables target.",
+      "sourceTypes": ["Capability", "Component", "Policy"],
+      "targetTypes": ["Workflow", "UseCase", "Outcome", "Project"]
+    },
+    {
+      "name": "SUPPORTS",
+      "description": "Source supports target.",
+      "sourceTypes": ["Capability", "Component", "Workflow", "Policy"],
+      "targetTypes": ["Project", "Outcome", "Persona", "UseCase"]
+    },
+    {
+      "name": "DEPENDS_ON",
+      "description": "Source depends on target.",
+      "sourceTypes": ["Capability", "Component", "Workflow", "Project", "Decision"],
+      "targetTypes": ["Capability", "Component", "Workflow", "Policy", "Constraint"]
+    },
+    {
+      "name": "GOVERNS",
+      "description": "Source governs target.",
+      "sourceTypes": ["Policy", "GovernanceControl"],
+      "targetTypes": ["Domain", "Component", "Workflow", "Project", "Decision"]
+    },
+    {
+      "name": "SECURES",
+      "description": "Source secures target.",
+      "sourceTypes": ["SecurityBoundary", "Policy", "GovernanceControl"],
+      "targetTypes": ["Domain", "Component", "Workflow", "Project", "Document"]
+    },
+    {
+      "name": "REQUIRES",
+      "description": "Source requires target.",
+      "sourceTypes": ["Project", "Workflow", "Decision", "UseCase"],
+      "targetTypes": ["Capability", "Component", "Policy", "Constraint", "Persona"]
+    },
+    {
+      "name": "CONSTRAINED_BY",
+      "description": "Source is constrained by target.",
+      "sourceTypes": ["Project", "Workflow", "Decision", "Component", "Capability"],
+      "targetTypes": ["Constraint", "Policy", "SecurityBoundary", "GovernanceControl"]
+    },
+    {
+      "name": "HAS_RISK",
+      "description": "Source has risk target.",
+      "sourceTypes": ["Project", "Decision", "Workflow", "Component"],
+      "targetTypes": ["Risk"]
+    },
+    {
+      "name": "HAS_OUTCOME",
+      "description": "Source produces or targets outcome.",
+      "sourceTypes": ["Project", "UseCase", "Capability", "Workflow"],
+      "targetTypes": ["Outcome"]
+    },
+    {
+      "name": "PROVIDES_CONTEXT_TO",
+      "description": "Source provides context to target.",
+      "sourceTypes": ["Concept", "Domain", "Document", "Section"],
+      "targetTypes": ["Project", "Persona", "UseCase", "Decision"]
+    },
+    {
+      "name": "RELATED_TO",
+      "description": "Source is related to target.",
+      "sourceTypes": ["*"],
+      "targetTypes": ["*"]
+    }
+  ],
+  "extensionRules": {
+    "domainPacksMayAddTypes": true,
+    "domainPacksMayRedefineBaseTypes": false,
+    "requiresMigrationNotes": true
+  }
+}
+

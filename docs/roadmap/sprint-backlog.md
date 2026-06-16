@@ -19,7 +19,7 @@ This backlog is the source of truth for the completion loop. Agents should work 
 | W1-S2 | 1 | URL list ingestion | complete | Unit tests plus local ingestion fixture |
 | W1-S3 | 1 | Documentation portal discovery | complete | Discovery integration test with controlled fixture site |
 | W1-S4 | 1 | Canonical document generation | complete | Canonical document contract tests and evidence anchors |
-| W2-S1 | 2 | Base ontology package | not_started | Ontology schema unit tests and examples |
+| W2-S1 | 2 | Base ontology package | complete | Ontology schema unit tests and examples |
 | W2-S2 | 2 | Foundry domain pack | not_started | Domain pack validation tests and fixture coverage |
 | W2-S3 | 2 | Extraction candidate pipeline | not_started | Extraction eval fixture with evidence-linked nodes and edges |
 | W2-S4 | 2 | Extraction quality reporting | not_started | Completion, precision, failure, and evidence coverage reports |
@@ -164,3 +164,18 @@ E2e tests: `node tools/quality/run-gate.mjs e2e` passed as not applicable becaus
 Security/performance checks: Full `node tools/quality/run-gate.mjs quality` passed. Empty content is explicit, content hash is generated, and evidence spans are attached to sections, links, and tables.
 Open debt: HTML processing is intentionally fixture-oriented and does not replace a browser renderer, PDF parser, or production HTML extraction library.
 Next sprint: W2-S1.
+
+### W2-S1 Completion Note
+
+Date: 2026-06-16
+Agent: Codex
+Commit: W2-S1 completion commit
+Scope: Added domain-agnostic base ontology schema, base ontology data, ontology registry package, and tests for strategic business entities, security/governance concepts, duplicate prevention, and extension rules.
+Local deployment: Not applicable. This sprint is ontology package/data work and does not add app or service runtime behavior.
+Unit tests: `node tools/quality/run-gate.mjs unit` passed with 17 tests.
+Contract tests: `node tools/quality/run-gate.mjs contract` passed with 11 tests.
+Integration tests: `node tools/quality/run-gate.mjs integration` passed with 1 existing controlled fixture portal test.
+E2e tests: `node tools/quality/run-gate.mjs e2e` passed as not applicable because no app/workflow implementation exists yet.
+Security/performance checks: Full `node tools/quality/run-gate.mjs quality` passed. Security boundaries, governance controls, policies, constraints, and risks are first-class ontology concepts.
+Open debt: Foundry domain pack extension validation begins in W2-S2.
+Next sprint: W2-S2.

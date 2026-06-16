@@ -53,6 +53,12 @@ Outputs:
 - validation rules
 - node and edge type definitions
 
+Contract location:
+
+- `schemas/ontology/v1/ontology-schema.schema.json`
+- `schemas/ontology/v1/base-ontology.json`
+- `packages/ontology/src/base-ontology.mjs`
+
 ## Security and Privacy
 
 - Security boundaries, authentication methods, authorization models, governance controls, and policies are first-class ontology concepts.
@@ -66,4 +72,3 @@ Outputs:
 - Foundry domain pack can validate sample nodes and edges.
 - Base ontology can represent all strategic business entities.
 - No domain pack can redefine a base concept incompatibly without review.
-
