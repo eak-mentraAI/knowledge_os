@@ -18,7 +18,7 @@ This backlog is the source of truth for the completion loop. Agents should work 
 | W1-S1 | 1 | Source definition and crawl inventory contracts | complete | Unit and contract tests for source/crawl schemas |
 | W1-S2 | 1 | URL list ingestion | complete | Unit tests plus local ingestion fixture |
 | W1-S3 | 1 | Documentation portal discovery | complete | Discovery integration test with controlled fixture site |
-| W1-S4 | 1 | Canonical document generation | not_started | Canonical document contract tests and evidence anchors |
+| W1-S4 | 1 | Canonical document generation | complete | Canonical document contract tests and evidence anchors |
 | W2-S1 | 2 | Base ontology package | not_started | Ontology schema unit tests and examples |
 | W2-S2 | 2 | Foundry domain pack | not_started | Domain pack validation tests and fixture coverage |
 | W2-S3 | 2 | Extraction candidate pipeline | not_started | Extraction eval fixture with evidence-linked nodes and edges |
@@ -149,3 +149,18 @@ E2e tests: `node tools/quality/run-gate.mjs e2e` passed as not applicable becaus
 Security/performance checks: Full `node tools/quality/run-gate.mjs quality` passed. Discovery ignores non-web links, strips fragments, dedupes URLs, and blocks out-of-allowlist domains.
 Open debt: This sprint intentionally accepts a supplied page loader; real network fetching, robots handling, and JavaScript rendering remain later source acquisition work.
 Next sprint: W1-S4.
+
+### W1-S4 Completion Note
+
+Date: 2026-06-16
+Agent: Codex
+Commit: W1-S4 completion commit
+Scope: Added canonical document schema, controlled HTML-to-canonical-document processor, stable document/section IDs, normalized text, links, simple table extraction, content hashes, and evidence spans.
+Local deployment: Not applicable. This sprint is package-level document processing and does not add app or service runtime behavior.
+Unit tests: `node tools/quality/run-gate.mjs unit` passed with 12 tests.
+Contract tests: `node tools/quality/run-gate.mjs contract` passed with 8 tests, including generated canonical document schema validation.
+Integration tests: `node tools/quality/run-gate.mjs integration` passed with 1 existing controlled fixture portal test.
+E2e tests: `node tools/quality/run-gate.mjs e2e` passed as not applicable because no app/workflow implementation exists yet.
+Security/performance checks: Full `node tools/quality/run-gate.mjs quality` passed. Empty content is explicit, content hash is generated, and evidence spans are attached to sections, links, and tables.
+Open debt: HTML processing is intentionally fixture-oriented and does not replace a browser renderer, PDF parser, or production HTML extraction library.
+Next sprint: W2-S1.

@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import test from "node:test";
 import { ingestUrlList } from "../../packages/source-acquisition/src/url-list-ingestion.mjs";
+import { validate } from "../helpers/simple-schema-validator.mjs";
 import {
   loadJson,
   loadExamples,
@@ -17,63 +18,6 @@ const examplesByKind = new Map(loadExamples().map((example) => {
   if ("recordId" in example) return ["SourceRecord", example];
   return ["CrawlInventory", example];
 }));
-
-function validate(schema, value, path = schema.title) {
-  const errors = [];
-
-  if (schema.const !== undefined && value !== schema.const) {
-    errors.push(`${path} must equal ${schema.const}`);
-  }
-
-  if (schema.enum && !schema.enum.includes(value)) {
-    errors.push(`${path} must be one of ${schema.enum.join(", ")}`);
-  }
-
-  if (schema.type) {
-    const allowed = Array.isArray(schema.type) ? schema.type : [schema.type];
-    const actual = value === null ? "null" : Array.isArray(value) ? "array" : Number.isInteger(value) ? "integer" : typeof value;
-    const compatible = allowed.includes(actual) || (actual === "integer" && allowed.includes("number"));
-    if (!compatible) {
-      errors.push(`${path} expected ${allowed.join("|")} but received ${actual}`);
-      return errors;
-    }
-  }
-
-  if (typeof value === "string" && schema.pattern) {
-    const re = new RegExp(schema.pattern);
-    if (!re.test(value)) errors.push(`${path} does not match ${schema.pattern}`);
-  }
-
-  if (typeof value === "number") {
-    if (schema.minimum !== undefined && value < schema.minimum) errors.push(`${path} is below minimum`);
-    if (schema.maximum !== undefined && value > schema.maximum) errors.push(`${path} is above maximum`);
-  }
-
-  if (Array.isArray(value)) {
-    if (schema.minItems !== undefined && value.length < schema.minItems) errors.push(`${path} needs at least ${schema.minItems} item(s)`);
-    if (schema.uniqueItems && new Set(value.map((item) => JSON.stringify(item))).size !== value.length) errors.push(`${path} must contain unique items`);
-    if (schema.items) {
-      value.forEach((item, index) => errors.push(...validate(schema.items, item, `${path}[${index}]`)));
-    }
-  }
-
-  if (value && typeof value === "object" && !Array.isArray(value)) {
-    for (const required of schema.required ?? []) {
-      if (!(required in value)) errors.push(`${path}.${required} is required`);
-    }
-    for (const [key, child] of Object.entries(schema.properties ?? {})) {
-      if (key in value) errors.push(...validate(child, value[key], `${path}.${key}`));
-    }
-    if (schema.additionalProperties === false) {
-      const allowed = new Set(Object.keys(schema.properties ?? {}));
-      for (const key of Object.keys(value)) {
-        if (!allowed.has(key)) errors.push(`${path}.${key} is not allowed`);
-      }
-    }
-  }
-
-  return errors;
-}
 
 test("source acquisition examples satisfy their schemas", () => {
   for (const [title, schema] of schemasByTitle) {

@@ -38,6 +38,11 @@ Output:
 - `DocumentTable`
 - `DocumentLink`
 
+Contract location:
+
+- `schemas/document-processing/v1/canonical-document.schema.json`
+- `packages/document-processing/src/html-to-canonical-document.mjs`
+
 ## Security and Privacy
 
 - Treat all content as untrusted.
@@ -55,4 +60,3 @@ Output:
 - Section anchors are stable across non-substantive crawl changes.
 - Extraction can cite exact evidence spans.
 - Empty or failed documents cannot silently pass as complete.
-
