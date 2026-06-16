@@ -39,6 +39,7 @@ The original Word documents are stored in `docs/source/` in the project folder:
 
 ## Testing
 
+- [Quality Command Contract](testing/quality-command-contract.md)
 - [Test Strategy](testing/test-strategy.md)
 - [E2e Acceptance Matrix](testing/e2e-acceptance-matrix.md)
 

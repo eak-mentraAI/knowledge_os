@@ -97,3 +97,4 @@ W0-S2 must establish root-level commands for:
 
 Until those commands exist, implementation sprints should not begin.
 
+The command contract is defined in [Quality Command Contract](quality-command-contract.md).

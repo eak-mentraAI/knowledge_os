@@ -1,0 +1,22 @@
+{
+  "name": "knowledge-os",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Knowledge OS platform workspace.",
+  "engines": {
+    "node": ">=24.16.0"
+  },
+  "scripts": {
+    "quality": "node tools/quality/run-gate.mjs quality",
+    "test": "npm run quality",
+    "test:unit": "node tools/quality/run-gate.mjs unit",
+    "test:contract": "node tools/quality/run-gate.mjs contract",
+    "test:integration": "node tools/quality/run-gate.mjs integration",
+    "test:e2e": "node tools/quality/run-gate.mjs e2e",
+    "test:eval": "node tools/quality/run-gate.mjs eval",
+    "check:docs": "node tools/quality/run-gate.mjs docs",
+    "dev": "node tools/quality/run-gate.mjs dev"
+  }
+}
+

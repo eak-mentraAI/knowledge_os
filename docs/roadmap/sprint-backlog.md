@@ -14,7 +14,7 @@ This backlog is the source of truth for the completion loop. Agents should work 
 | ID | Wave | Sprint | Status | Primary proof |
 | --- | --- | --- | --- | --- |
 | W0-S1 | 0 | Standards, repo shape, and agent workflow | complete | Docs scaffold, anti-slop standards, audit pack, completion loop |
-| W0-S2 | 0 | Quality command contract and test skeleton | not_started | Root quality commands documented and wired to placeholder-safe checks |
+| W0-S2 | 0 | Quality command contract and test skeleton | complete | Root quality commands documented and wired to placeholder-safe checks |
 | W1-S1 | 1 | Source definition and crawl inventory contracts | not_started | Unit and contract tests for source/crawl schemas |
 | W1-S2 | 1 | URL list ingestion | not_started | Unit tests plus local ingestion fixture |
 | W1-S3 | 1 | Documentation portal discovery | not_started | Discovery integration test with controlled fixture site |
@@ -90,3 +90,17 @@ Security/performance checks: Standards and gates documented.
 Open debt: W0-S2 must create executable quality command contract before implementation sprints begin.
 Next sprint: W0-S2.
 
+### W0-S2 Completion Note
+
+Date: 2026-06-16
+Agent: Codex
+Commit: W0-S2 completion commit
+Scope: Added root quality command contract, dependency-free Node gate runner, PowerShell wrapper, initial unit self-test, test/eval directory skeletons, and command documentation.
+Local deployment: `npm run dev` contract exists; no local app implementation exists yet, so the dev gate reports not applicable.
+Unit tests: `node tools/quality/run-gate.mjs unit` passed.
+Contract tests: `node tools/quality/run-gate.mjs contract` passed as not applicable because no schema implementation exists yet.
+Integration tests: `node tools/quality/run-gate.mjs integration` passed as not applicable because no cross-boundary implementation exists yet.
+E2e tests: `node tools/quality/run-gate.mjs e2e` passed as not applicable because no app/workflow implementation exists yet.
+Security/performance checks: `node tools/quality/run-gate.mjs quality` passed; no security-sensitive runtime behavior exists yet.
+Open debt: Global `node` and `npm` are not reliable in the current shell; gates were verified with the Codex bundled Node executable. Future implementation should install/configure Node LTS on PATH or continue using `NODE_EXE`.
+Next sprint: W1-S1.

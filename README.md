@@ -17,6 +17,7 @@ Primary entry points:
 - [Sprint Backlog and Completion Ledger](docs/roadmap/sprint-backlog.md)
 - [Engineering Specs](docs/specs/README.md)
 - [Implementation Completion Loop](docs/strategy/implementation-completion-loop.md)
+- [Quality Command Contract](docs/testing/quality-command-contract.md)
 - [Test Strategy](docs/testing/test-strategy.md)
 - [Documentation Sharding Strategy](docs/strategy/documentation-sharding.md)
 - [Agent Orchestration Strategy](docs/strategy/agent-orchestration.md)
@@ -47,3 +48,20 @@ Knowledge OS produces four primary output families:
 ## Tooling Baseline
 
 The first implementation baseline is documented in [Tooling Baseline](docs/standards/tooling-baseline.md). Before creating lockfiles, implementation agents must re-verify current stable versions and document any changes through the decision process.
+
+## Quality Commands
+
+The root quality command contract is documented in [Quality Command Contract](docs/testing/quality-command-contract.md).
+
+Primary commands:
+
+```bash
+npm run quality
+npm run test:unit
+npm run test:contract
+npm run test:integration
+npm run test:e2e
+npm run test:eval
+npm run check:docs
+npm run dev
+```
