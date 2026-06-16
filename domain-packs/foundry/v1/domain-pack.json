@@ -1,0 +1,259 @@
+{
+  "schemaVersion": "ontology-domain-pack.v1",
+  "domainPackId": "foundry",
+  "version": "v1",
+  "extendsOntology": {
+    "ontologyId": "base",
+    "version": "v1"
+  },
+  "description": "Initial Palantir Foundry domain pack for Knowledge OS validation.",
+  "nodeTypes": [
+    {
+      "name": "ArchitectureLayer",
+      "extends": "Concept",
+      "description": "A Foundry architecture layer such as Infrastructure, Data, Semantic, AI, or Application."
+    },
+    {
+      "name": "OntologyObject",
+      "extends": "Concept",
+      "description": "A modeled object type in the Foundry ontology."
+    },
+    {
+      "name": "OntologyLink",
+      "extends": "Concept",
+      "description": "A relationship between ontology object types."
+    },
+    {
+      "name": "OntologyAction",
+      "extends": "Workflow",
+      "description": "An action exposed through the ontology for operational workflows."
+    },
+    {
+      "name": "AdministrativeAction",
+      "extends": "Workflow",
+      "description": "An administrative operation for configuration, governance, or platform management."
+    }
+  ],
+  "edgeTypes": [
+    {
+      "name": "BELONGS_TO_LAYER",
+      "description": "A Foundry component or concept belongs to an architecture layer.",
+      "sourceTypes": ["Component", "Concept", "Capability"],
+      "targetTypes": ["ArchitectureLayer"]
+    },
+    {
+      "name": "POWERS",
+      "description": "A Foundry component powers a capability, workflow, or application.",
+      "sourceTypes": ["Component"],
+      "targetTypes": ["Capability", "Workflow", "Component"]
+    },
+    {
+      "name": "AUTHENTICATED_BY",
+      "description": "A workflow, component, or action is authenticated by a security boundary.",
+      "sourceTypes": ["Workflow", "Component", "OntologyAction", "AdministrativeAction"],
+      "targetTypes": ["SecurityBoundary"]
+    }
+  ],
+  "aliases": [
+    {
+      "canonical": "Ontology",
+      "aliases": ["The Ontology", "Ontology System", "Foundry Ontology"],
+      "targetNodeType": "Component"
+    },
+    {
+      "canonical": "AIP",
+      "aliases": ["Artificial Intelligence Platform", "Palantir AIP"],
+      "targetNodeType": "Component"
+    },
+    {
+      "canonical": "Apollo",
+      "aliases": ["Palantir Apollo"],
+      "targetNodeType": "Component"
+    }
+  ],
+  "seedEntities": [
+    {
+      "name": "Foundry",
+      "nodeType": "Component",
+      "summary": "The core platform being modeled by the initial Knowledge OS corpus.",
+      "aliases": ["Palantir Foundry"]
+    },
+    {
+      "name": "Apollo",
+      "nodeType": "Component",
+      "summary": "Foundry continuous delivery and deployment capability.",
+      "aliases": ["Palantir Apollo"]
+    },
+    {
+      "name": "Rubix",
+      "nodeType": "Component",
+      "summary": "Foundry component referenced by the initial domain pack.",
+      "aliases": []
+    },
+    {
+      "name": "Ontology",
+      "nodeType": "Component",
+      "summary": "Semantic modeling system that provides operational context.",
+      "aliases": ["The Ontology", "Ontology System", "Foundry Ontology"]
+    },
+    {
+      "name": "AIP",
+      "nodeType": "Component",
+      "summary": "AI platform capabilities grounded by Foundry knowledge and ontology context.",
+      "aliases": ["Artificial Intelligence Platform", "Palantir AIP"]
+    },
+    {
+      "name": "Multimodal Data Plane",
+      "nodeType": "Component",
+      "summary": "Data plane capability referenced by the initial Foundry architecture.",
+      "aliases": []
+    },
+    {
+      "name": "Workflow Automation",
+      "nodeType": "Capability",
+      "summary": "Capability for automating operational workflows.",
+      "aliases": []
+    },
+    {
+      "name": "Decision Support",
+      "nodeType": "Capability",
+      "summary": "Capability for supporting decisions with context and evidence.",
+      "aliases": []
+    },
+    {
+      "name": "AI Operations",
+      "nodeType": "Capability",
+      "summary": "Capability for operationalizing AI workflows.",
+      "aliases": []
+    },
+    {
+      "name": "Application Development",
+      "nodeType": "Capability",
+      "summary": "Capability for building Foundry applications.",
+      "aliases": []
+    },
+    {
+      "name": "Continuous Delivery",
+      "nodeType": "Capability",
+      "summary": "Capability for delivering changes continuously.",
+      "aliases": []
+    },
+    {
+      "name": "Governance Controls",
+      "nodeType": "GovernanceControl",
+      "summary": "Controls that support governance across Foundry assets.",
+      "aliases": []
+    },
+    {
+      "name": "Access Control",
+      "nodeType": "SecurityBoundary",
+      "summary": "Security boundary for controlling access.",
+      "aliases": []
+    },
+    {
+      "name": "Policy Enforcement",
+      "nodeType": "GovernanceControl",
+      "summary": "Governance control for enforcing policies.",
+      "aliases": []
+    },
+    {
+      "name": "Change Management",
+      "nodeType": "GovernanceControl",
+      "summary": "Control process for managing change.",
+      "aliases": []
+    },
+    {
+      "name": "Release Management",
+      "nodeType": "GovernanceControl",
+      "summary": "Control process for releases.",
+      "aliases": []
+    },
+    {
+      "name": "Authentication",
+      "nodeType": "SecurityBoundary",
+      "summary": "Security boundary for identity verification.",
+      "aliases": []
+    },
+    {
+      "name": "Authorization",
+      "nodeType": "SecurityBoundary",
+      "summary": "Security boundary for permission decisions.",
+      "aliases": []
+    },
+    {
+      "name": "Deployment Controls",
+      "nodeType": "GovernanceControl",
+      "summary": "Controls for deployment governance.",
+      "aliases": []
+    },
+    {
+      "name": "Data Governance",
+      "nodeType": "GovernanceControl",
+      "summary": "Governance controls over data assets and usage.",
+      "aliases": []
+    }
+  ],
+  "extractionGuidance": {
+    "entityFocus": [
+      "Architecture layers",
+      "Components",
+      "Capabilities",
+      "Security boundaries",
+      "Governance controls",
+      "Ontology objects and actions"
+    ],
+    "relationshipFocus": [
+      "dependencies",
+      "governance implications",
+      "security constraints",
+      "component-to-capability relationships",
+      "ontology-to-AIP relationships"
+    ],
+    "securityFocus": [
+      "authentication",
+      "authorization",
+      "access control",
+      "policy enforcement",
+      "deployment controls",
+      "data governance"
+    ]
+  },
+  "validationRules": [
+    "Every extracted Foundry node must map to a base or domain-pack node type.",
+    "Every extracted edge must map to a base or domain-pack edge type.",
+    "Security and governance facts must preserve source evidence.",
+    "Domain pack aliases may not create a new canonical entity when a seed entity exists."
+  ],
+  "examples": {
+    "nodes": [
+      {
+        "id": "component:ontology",
+        "type": "Component",
+        "name": "Ontology"
+      },
+      {
+        "id": "component:aip",
+        "type": "Component",
+        "name": "AIP"
+      },
+      {
+        "id": "security:access-control",
+        "type": "SecurityBoundary",
+        "name": "Access Control"
+      }
+    ],
+    "edges": [
+      {
+        "type": "PROVIDES_CONTEXT_TO",
+        "source": "component:ontology",
+        "target": "component:aip"
+      },
+      {
+        "type": "SECURES",
+        "source": "security:access-control",
+        "target": "component:ontology"
+      }
+    ]
+  }
+}
+

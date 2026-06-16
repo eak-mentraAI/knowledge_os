@@ -1,0 +1,250 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://knowledge-os.local/schemas/ontology/v1/domain-pack.schema.json",
+  "title": "DomainPack",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "domainPackId",
+    "version",
+    "extendsOntology",
+    "description",
+    "nodeTypes",
+    "edgeTypes",
+    "aliases",
+    "seedEntities",
+    "extractionGuidance",
+    "validationRules",
+    "examples"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "ontology-domain-pack.v1"
+    },
+    "domainPackId": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{1,80}$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^v[0-9]+(\\.[0-9]+){0,2}$"
+    },
+    "extendsOntology": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ontologyId", "version"],
+      "properties": {
+        "ontologyId": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "nodeTypes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/DomainNodeType"
+      }
+    },
+    "edgeTypes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/DomainEdgeType"
+      }
+    },
+    "aliases": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/AliasSet"
+      }
+    },
+    "seedEntities": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/SeedEntity"
+      }
+    },
+    "extractionGuidance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["entityFocus", "relationshipFocus", "securityFocus"],
+      "properties": {
+        "entityFocus": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "relationshipFocus": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "securityFocus": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "validationRules": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "examples": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nodes", "edges"],
+      "properties": {
+        "nodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ExampleNode"
+          }
+        },
+        "edges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ExampleEdge"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "DomainNodeType": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "extends", "description"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Za-z0-9]+$"
+        },
+        "extends": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Za-z0-9]+$"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "DomainEdgeType": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "description", "sourceTypes", "targetTypes"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_]+$"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceTypes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "targetTypes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AliasSet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["canonical", "aliases", "targetNodeType"],
+      "properties": {
+        "canonical": {
+          "type": "string",
+          "minLength": 1
+        },
+        "aliases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "targetNodeType": {
+          "type": "string"
+        }
+      }
+    },
+    "SeedEntity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "nodeType", "summary"],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "nodeType": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "aliases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ExampleNode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "name"],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "ExampleEdge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "source", "target"],
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
+

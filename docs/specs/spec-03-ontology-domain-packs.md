@@ -57,7 +57,10 @@ Contract location:
 
 - `schemas/ontology/v1/ontology-schema.schema.json`
 - `schemas/ontology/v1/base-ontology.json`
+- `schemas/ontology/v1/domain-pack.schema.json`
 - `packages/ontology/src/base-ontology.mjs`
+- `packages/ontology/src/domain-pack.mjs`
+- `domain-packs/foundry/v1/domain-pack.json`
 
 ## Security and Privacy
 

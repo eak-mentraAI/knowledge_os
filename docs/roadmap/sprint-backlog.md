@@ -20,7 +20,7 @@ This backlog is the source of truth for the completion loop. Agents should work 
 | W1-S3 | 1 | Documentation portal discovery | complete | Discovery integration test with controlled fixture site |
 | W1-S4 | 1 | Canonical document generation | complete | Canonical document contract tests and evidence anchors |
 | W2-S1 | 2 | Base ontology package | complete | Ontology schema unit tests and examples |
-| W2-S2 | 2 | Foundry domain pack | not_started | Domain pack validation tests and fixture coverage |
+| W2-S2 | 2 | Foundry domain pack | complete | Domain pack validation tests and fixture coverage |
 | W2-S3 | 2 | Extraction candidate pipeline | not_started | Extraction eval fixture with evidence-linked nodes and edges |
 | W2-S4 | 2 | Extraction quality reporting | not_started | Completion, precision, failure, and evidence coverage reports |
 | W3-S1 | 3 | Entity resolution contracts | not_started | Alias and canonical ID unit tests |
@@ -179,3 +179,18 @@ E2e tests: `node tools/quality/run-gate.mjs e2e` passed as not applicable becaus
 Security/performance checks: Full `node tools/quality/run-gate.mjs quality` passed. Security boundaries, governance controls, policies, constraints, and risks are first-class ontology concepts.
 Open debt: Foundry domain pack extension validation begins in W2-S2.
 Next sprint: W2-S2.
+
+### W2-S2 Completion Note
+
+Date: 2026-06-16
+Agent: Codex
+Commit: W2-S2 completion commit
+Scope: Added Foundry domain pack schema, Foundry v1 domain pack data, domain-pack validation helpers, seed coverage, alias coverage, examples, and tests preventing base ontology redefinition.
+Local deployment: Not applicable. This sprint is ontology/domain-pack data and validation work.
+Unit tests: `node tools/quality/run-gate.mjs unit` passed with 21 tests.
+Contract tests: `node tools/quality/run-gate.mjs contract` passed with 14 tests.
+Integration tests: `node tools/quality/run-gate.mjs integration` passed with 1 existing controlled fixture portal test.
+E2e tests: `node tools/quality/run-gate.mjs e2e` passed as not applicable because no app/workflow implementation exists yet.
+Security/performance checks: Full `node tools/quality/run-gate.mjs quality` passed. Foundry pack includes security and governance seed entities and extraction focus.
+Open debt: Extraction candidate pipeline begins in W2-S3; this sprint does not extract nodes or edges from canonical documents yet.
+Next sprint: W2-S3.
