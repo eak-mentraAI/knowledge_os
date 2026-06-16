@@ -46,6 +46,14 @@ Output:
 - `CrawlInventory`
 - raw content reference
 
+Contract location:
+
+- `schemas/source-acquisition/v1/source-definition.schema.json`
+- `schemas/source-acquisition/v1/crawl-policy.schema.json`
+- `schemas/source-acquisition/v1/source-record.schema.json`
+- `schemas/source-acquisition/v1/crawl-inventory.schema.json`
+- `packages/source-acquisition-contracts/src/registry.mjs`
+
 ## Security and Privacy
 
 - Enforce domain allowlists.
@@ -66,4 +74,3 @@ Output:
 - Every fetched document has source provenance and content hash.
 - Failed and skipped pages are visible in inventory.
 - Crawl can be resumed without duplicating records.
-

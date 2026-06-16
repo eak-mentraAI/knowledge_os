@@ -15,7 +15,7 @@ This backlog is the source of truth for the completion loop. Agents should work 
 | --- | --- | --- | --- | --- |
 | W0-S1 | 0 | Standards, repo shape, and agent workflow | complete | Docs scaffold, anti-slop standards, audit pack, completion loop |
 | W0-S2 | 0 | Quality command contract and test skeleton | complete | Root quality commands documented and wired to placeholder-safe checks |
-| W1-S1 | 1 | Source definition and crawl inventory contracts | not_started | Unit and contract tests for source/crawl schemas |
+| W1-S1 | 1 | Source definition and crawl inventory contracts | complete | Unit and contract tests for source/crawl schemas |
 | W1-S2 | 1 | URL list ingestion | not_started | Unit tests plus local ingestion fixture |
 | W1-S3 | 1 | Documentation portal discovery | not_started | Discovery integration test with controlled fixture site |
 | W1-S4 | 1 | Canonical document generation | not_started | Canonical document contract tests and evidence anchors |
@@ -104,3 +104,18 @@ E2e tests: `node tools/quality/run-gate.mjs e2e` passed as not applicable becaus
 Security/performance checks: `node tools/quality/run-gate.mjs quality` passed; no security-sensitive runtime behavior exists yet.
 Open debt: Global `node` and `npm` are not reliable in the current shell; gates were verified with the Codex bundled Node executable. Future implementation should install/configure Node LTS on PATH or continue using `NODE_EXE`.
 Next sprint: W1-S1.
+
+### W1-S1 Completion Note
+
+Date: 2026-06-16
+Agent: Codex
+Commit: W1-S1 completion commit
+Scope: Added versioned source acquisition schemas for `SourceDefinition`, `CrawlPolicy`, `SourceRecord`, and `CrawlInventory`; added examples, a schema registry package, unit tests, and contract tests.
+Local deployment: Not applicable. This sprint defines contracts and does not add app or service runtime behavior.
+Unit tests: `node tools/quality/run-gate.mjs unit` passed with 5 tests.
+Contract tests: `node tools/quality/run-gate.mjs contract` passed with 5 tests.
+Integration tests: `node tools/quality/run-gate.mjs integration` passed as not applicable because no deployable app/service implementation exists yet.
+E2e tests: `node tools/quality/run-gate.mjs e2e` passed as not applicable because no app/workflow implementation exists yet.
+Security/performance checks: Full `node tools/quality/run-gate.mjs quality` passed. Schemas require allowlists, crawl limits, provenance, content hash fields, failure totals, and checkpoint state.
+Open debt: JSON Schema validation is currently enforced by dependency-free contract tests; if a future sprint adds a full JSON Schema validator, update the quality contract and tests together.
+Next sprint: W1-S2.

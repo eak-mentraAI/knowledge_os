@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://knowledge-os.local/schemas/source-acquisition/v1/source-record.schema.json",
+  "title": "SourceRecord",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "recordId",
+    "sourceId",
+    "crawlJobId",
+    "url",
+    "normalizedUrl",
+    "status",
+    "discoveredAt",
+    "contentHashSha256",
+    "rawContentRef",
+    "discoveredLinks",
+    "provenance"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "source-acquisition.v1"
+    },
+    "recordId": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{2,120}$"
+    },
+    "sourceId": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{2,80}$"
+    },
+    "crawlJobId": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{2,120}$"
+    },
+    "url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "normalizedUrl": {
+      "type": "string",
+      "format": "uri"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "discovered",
+        "fetched",
+        "skipped",
+        "failed",
+        "blocked"
+      ]
+    },
+    "discoveredAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "fetchedAt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "httpStatus": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 100,
+      "maximum": 599
+    },
+    "contentType": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 200
+    },
+    "lastModified": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "contentHashSha256": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "rawContentRef": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^(artifact|content)://[A-Za-z0-9._~:/?#\\[\\]@!$&'()*+,;=%-]+$"
+    },
+    "discoveredLinks": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uri"
+      }
+    },
+    "error": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "message": {
+          "type": "string",
+          "maxLength": 1000
+        },
+        "retryable": {
+          "type": "boolean"
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceType",
+        "sourceLocation",
+        "domainPackId",
+        "policyId"
+      ],
+      "properties": {
+        "sourceType": {
+          "type": "string"
+        },
+        "sourceLocation": {
+          "type": "string",
+          "format": "uri"
+        },
+        "domainPackId": {
+          "type": "string"
+        },
+        "policyId": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
+

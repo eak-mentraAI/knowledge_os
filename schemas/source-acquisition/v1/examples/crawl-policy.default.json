@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "source-acquisition.v1",
+  "policyId": "foundry-docs-default",
+  "allowedDomains": [
+    "example.com"
+  ],
+  "maxDepth": 4,
+  "maxPages": 5000,
+  "maxConcurrency": 8,
+  "requestTimeoutMs": 30000,
+  "respectRobotsTxt": true,
+  "renderJavaScript": true,
+  "retry": {
+    "maxAttempts": 3,
+    "backoffMs": 1000
+  }
+}
+

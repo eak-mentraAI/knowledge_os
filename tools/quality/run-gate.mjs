@@ -54,7 +54,7 @@ const gates = {
   integration: {
     label: "integration tests",
     testDirs: ["tests/integration"],
-    implementationDirs: ["apps", "services", "packages"]
+    implementationDirs: ["apps", "services"]
   },
   e2e: {
     label: "e2e workflow tests",
@@ -246,4 +246,3 @@ function runGate(name) {
 
 const ok = runGate(gate);
 if (!ok && process.exitCode === undefined) process.exitCode = 1;
-

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "source-acquisition.v1",
+  "recordId": "foundry-docs-platform-overview",
+  "sourceId": "foundry-docs",
+  "crawlJobId": "crawl-foundry-docs-20260616",
+  "url": "https://example.com/foundry/docs/platform-overview",
+  "normalizedUrl": "https://example.com/foundry/docs/platform-overview",
+  "status": "fetched",
+  "discoveredAt": "2026-06-16T19:01:00Z",
+  "fetchedAt": "2026-06-16T19:01:03Z",
+  "httpStatus": 200,
+  "contentType": "text/html; charset=utf-8",
+  "lastModified": null,
+  "contentHashSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "rawContentRef": "content://foundry-docs/platform-overview.html",
+  "discoveredLinks": [
+    "https://example.com/foundry/docs/getting-started",
+    "https://example.com/foundry/docs/ontology"
+  ],
+  "error": null,
+  "provenance": {
+    "sourceType": "documentation_site",
+    "sourceLocation": "https://example.com/foundry/docs",
+    "domainPackId": "foundry",
+    "policyId": "foundry-docs-default"
+  }
+}
+

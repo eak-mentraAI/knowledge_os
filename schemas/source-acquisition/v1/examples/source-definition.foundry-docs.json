@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "source-acquisition.v1",
+  "sourceId": "foundry-docs",
+  "name": "Foundry Documentation",
+  "sourceType": "documentation_site",
+  "location": {
+    "uri": "https://example.com/foundry/docs",
+    "label": "Foundry docs root"
+  },
+  "domainPack": {
+    "id": "foundry",
+    "version": "v1"
+  },
+  "crawlPolicy": {
+    "policyId": "foundry-docs-default",
+    "allowedDomains": [
+      "example.com"
+    ],
+    "maxDepth": 4,
+    "maxPages": 5000,
+    "maxConcurrency": 8,
+    "requestTimeoutMs": 30000,
+    "respectRobotsTxt": true,
+    "renderJavaScript": true,
+    "retry": {
+      "maxAttempts": 3,
+      "backoffMs": 1000
+    }
+  },
+  "createdAt": "2026-06-16T19:00:00Z",
+  "createdBy": "eak-mentraAI",
+  "metadata": {
+    "businessOwner": "Knowledge OS",
+    "initialCorpus": true
+  }
+}
+
