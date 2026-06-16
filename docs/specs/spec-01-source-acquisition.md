@@ -53,6 +53,8 @@ Contract location:
 - `schemas/source-acquisition/v1/source-record.schema.json`
 - `schemas/source-acquisition/v1/crawl-inventory.schema.json`
 - `packages/source-acquisition-contracts/src/registry.mjs`
+- `packages/source-acquisition/src/url-list-ingestion.mjs`
+- `packages/source-acquisition/src/documentation-portal-discovery.mjs`
 
 ## Security and Privacy
 

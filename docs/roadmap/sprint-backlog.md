@@ -17,7 +17,7 @@ This backlog is the source of truth for the completion loop. Agents should work 
 | W0-S2 | 0 | Quality command contract and test skeleton | complete | Root quality commands documented and wired to placeholder-safe checks |
 | W1-S1 | 1 | Source definition and crawl inventory contracts | complete | Unit and contract tests for source/crawl schemas |
 | W1-S2 | 1 | URL list ingestion | complete | Unit tests plus local ingestion fixture |
-| W1-S3 | 1 | Documentation portal discovery | not_started | Discovery integration test with controlled fixture site |
+| W1-S3 | 1 | Documentation portal discovery | complete | Discovery integration test with controlled fixture site |
 | W1-S4 | 1 | Canonical document generation | not_started | Canonical document contract tests and evidence anchors |
 | W2-S1 | 2 | Base ontology package | not_started | Ontology schema unit tests and examples |
 | W2-S2 | 2 | Foundry domain pack | not_started | Domain pack validation tests and fixture coverage |
@@ -134,3 +134,18 @@ E2e tests: `node tools/quality/run-gate.mjs e2e` passed as not applicable becaus
 Security/performance checks: Full `node tools/quality/run-gate.mjs quality` passed. URL normalization strips credentials and fragments; allowlist enforcement blocks out-of-domain URLs.
 Open debt: CSV parser is intentionally scoped to URL-list ingestion and should not be generalized until another source type needs it.
 Next sprint: W1-S3.
+
+### W1-S3 Completion Note
+
+Date: 2026-06-16
+Agent: Codex
+Commit: W1-S3 completion commit
+Scope: Added documentation portal discovery over a provided page loader, HTML link extraction, relative URL resolution, deduplication, allowlist blocking, and crawl inventory output.
+Local deployment: Not applicable. This sprint uses a controlled local fixture site and does not add a deployed app or network crawler.
+Unit tests: `node tools/quality/run-gate.mjs unit` passed with 10 tests.
+Contract tests: `node tools/quality/run-gate.mjs contract` passed with 6 tests.
+Integration tests: `node tools/quality/run-gate.mjs integration` passed with 1 controlled fixture portal test.
+E2e tests: `node tools/quality/run-gate.mjs e2e` passed as not applicable because no app/workflow implementation exists yet.
+Security/performance checks: Full `node tools/quality/run-gate.mjs quality` passed. Discovery ignores non-web links, strips fragments, dedupes URLs, and blocks out-of-allowlist domains.
+Open debt: This sprint intentionally accepts a supplied page loader; real network fetching, robots handling, and JavaScript rendering remain later source acquisition work.
+Next sprint: W1-S4.
